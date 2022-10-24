@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Search from './components/Search';
 import config from './config';
 import generateSignature from './helpers/generateSignature';
 import search from './services/search';
@@ -8,7 +9,11 @@ function App() {
   useEffect(() => {
     search();
   }, []);
-  return <div className="App"></div>;
+  return (
+    <div className="App p-5">
+      <Search />
+    </div>
+  );
 }
 
 export default App;
