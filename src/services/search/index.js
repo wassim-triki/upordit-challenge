@@ -14,10 +14,14 @@ const buildSearchEndpoint = (querySettings) => {
   );
   return endpoint;
 };
-const search = async (querySettings = searchQuerySettings) => {
-  const searchEndpoint = buildSearchEndpoint(querySettings);
-  const response = await uproditClient.get(searchEndpoint);
-  return response.data;
+const search = async (querySettings = searchQuerySettings, thunkAPI) => {
+  try {
+    const searchEndpoint = buildSearchEndpoint(querySettings);
+    const response = await uproditClient.get(searchEndpoint);
+    return response.data;
+  } catch (error) {
+    thunkAPI.rejectWithValue('Something went wrong!');
+  }
 };
 
 export default search;

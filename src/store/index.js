@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import usersReducer from '../features/search/searchSlice';
 export const store = configureStore({
-  reducer: {},
+  reducer: { searchUsers: usersReducer },
 });
 
 export default store;
