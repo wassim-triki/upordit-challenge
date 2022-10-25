@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from './components/Card';
 import Search from './components/Search';
@@ -10,6 +10,7 @@ import uproditClient from './services/uproditClient';
 
 function App() {
   const { users, isLoading, error } = useSelector((store) => store.searchUsers);
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSearchUsers());
@@ -21,10 +22,10 @@ function App() {
   }, [users]);
   return (
     <div className="App px-32 py-10 flex flex-col gap-5 ">
-      <Search />
+      <Search page={page} />
       {isLoading && <h1>Loading...</h1>}
       {error && <h1>Error: {error}</h1>}
-      <div className="grid overflow-hidden sm:grid-cols-2 lg:grid-cols-4 grid-cols-1 grid-rows-2 gap-4 ">
+      <div className="grid py-2 overflow-hidden sm:grid-cols-2 lg:grid-cols-4 grid-cols-1 grid-rows-2 gap-4 ">
         {users.map((user) => (
           <Card key={user.id} {...user} />
         ))}

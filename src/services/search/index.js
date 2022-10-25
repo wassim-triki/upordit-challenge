@@ -1,7 +1,7 @@
 import config from '../../config';
 import { getImage } from '../../features/search/searchSlice';
 import uproditClient from '../uproditClient';
-const searchQuerySettings = {
+export const searchQuerySettings = {
   startIndex: 0,
   maxResults: 3,
 };

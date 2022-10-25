@@ -15,15 +15,9 @@ export const getImage = createAsyncThunk('users/getImage', async (userId) => {
 });
 export const getSearchUsers = createAsyncThunk(
   'users/getSearchUsers',
-  async (_, thunkAPI) => {
-    const users = await search();
-    // const promises = [];
-
-    // users.forEach((user) =>
-    //   promises.push(thunkAPI.dispatch(getImage(user.id)))
-    // );
-    // const images = Promise.all(promises);
-    // console.log(images);
+  async (qs, thunkAPI) => {
+    const users = await search(qs);
+    console.log(users);
     return users;
   }
 );
