@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Card from './components/Card';
 import Search from './components/Search';
 import config from './config';
-import { getSearchUsers } from './features/search/searchSlice';
+import { getImage, getSearchUsers } from './features/search/searchSlice';
 import generateSignature from './helpers/generateSignature';
 import search from './services/search';
 import uproditClient from './services/uproditClient';
@@ -12,14 +13,22 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSearchUsers());
-    console.log(users);
   }, []);
+  useEffect(() => {
+    if (users) {
+      users.forEach(({ image_id }) => dispatch(getImage(image_id)));
+    }
+  }, [users]);
   return (
-    <div className="App p-5">
+    <div className="App px-32 py-10 flex flex-col gap-5 ">
       <Search />
       {isLoading && <h1>Loading...</h1>}
       {error && <h1>Error: {error}</h1>}
-      <ul>{users && users.map((user) => <li>{user.denomination}</li>)}</ul>
+      <div className="grid overflow-hidden sm:grid-cols-2 lg:grid-cols-4 grid-cols-1 grid-rows-2 gap-4 ">
+        {users.map((user) => (
+          <Card key={user.id} {...user} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { BiSearch } from 'react-icons/bi';
 const Search = () => {
   return (
-    <div className="border-2 border-gray-300 flex rounded-sm w-[80%] mx-auto ">
+    <div className="border-2 border-gray-300 flex rounded-sm w-full mx-auto ">
       <input
         className="pl-2 flex-1 border-none outline-none"
         type="text"
