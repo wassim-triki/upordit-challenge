@@ -18,6 +18,7 @@ const buildSearchEndpoint = (querySettings) => {
 const search = async (querySettings = searchQuerySettings, thunkAPI) => {
   try {
     const searchEndpoint = buildSearchEndpoint(querySettings);
+    console.log(searchEndpoint);
     const response = await uproditClient.get(searchEndpoint);
 
     return response.data;

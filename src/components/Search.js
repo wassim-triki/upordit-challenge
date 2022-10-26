@@ -10,7 +10,7 @@ const Search = ({ page }) => {
   const dispatch = useDispatch();
   const debouncedSearch = useDebounce(input, 500);
   useEffect(() => {
-    searchQuerySettings.startIndex = page - 1;
+    searchQuerySettings.startIndex = Math.abs(page - 1);
     debouncedSearch
       ? (searchQuerySettings.terms = debouncedSearch)
       : delete searchQuerySettings.terms;

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { AiFillStar } from 'react-icons/ai';
 import Avatar from '../assets/defaultAvatar.json';
 import parseImageToDataUrl from '../helpers/parseImageToDataUrl';
-const Card = ({ id, denomination, stars_count }) => {
+const Card = ({ id, denomination, stars_count, specialities }) => {
   const { images } = useSelector((store) => store.searchUsers);
   let profilePictureURL = Avatar.B64DataUrl;
   const image = images.find((img) => img.profileId == id);
@@ -11,13 +10,16 @@ const Card = ({ id, denomination, stars_count }) => {
     profilePictureURL = parseImageToDataUrl(image);
   }
 
+  console.log(specialities);
   return (
-    <div className="  rounded-sm shadow-md group w-[300px] h-[300px]">
-      <div className="bg-blue-200 h-[200px] overflow-hidden">
-        {/* <div className="h-full w-full bg-black bg-opacity-50 hidden group-hover:block  first-letter text-white p-4">
-          <h2 className="font-bold">Specialty :</h2>
-        </div> */}
-        {/* <div className="bg-blue-500 bg-opacity-50 h-full w-full "></div> */}
+    <div className="  rounded-sm shadow-md group w-[300px] h-[300px]  hover:cursor-pointer">
+      <div className="bg-blue-200 h-[200px] overflow-hidden relative">
+        <div className="h-full w-full bg-black hidden group-hover:block p-4 bg-opacity-50 absolute text-white">
+          <h2 className="font-extrabold">Speciality: </h2>
+          <ul>
+            {specialities && specialities.map((s) => <li key={s}>{s}</li>)}
+          </ul>
+        </div>
         <img
           className="w-full h-full object-cover"
           src={profilePictureURL}
@@ -26,9 +28,7 @@ const Card = ({ id, denomination, stars_count }) => {
       </div>
       <div className="flex flex-col p-2 gap-4 ">
         <h2 className="self-center font-extrabold text-xl">{denomination}</h2>
-        <div className="self-end flex items-center gap-1">
-          {stars_count} <AiFillStar className="text-xl text-yellow-400" />
-        </div>
+        <div className="self-end flex items-center gap-1">{stars_count} ⭐</div>
       </div>
     </div>
   );
